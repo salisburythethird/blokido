@@ -1,6 +1,6 @@
-
 import pygame
 from pygame import *
+
 
 class Entity(pygame.sprite.Sprite):
     def __init__(self):
@@ -23,6 +23,7 @@ class ExitBlock(Platform):
     def __init__(self, x, y, width, height):
         Platform.__init__(self, x, y, width, height)
         self.image.fill(Color("#FFFFCC"))
+
 
 class DeathBlock(Platform):
     def __init__(self, x, y, width, height):

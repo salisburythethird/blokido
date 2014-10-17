@@ -1,6 +1,3 @@
-import pygame
-import math
-from pygame import *
 from entities import *
 # 25 by 25
 WIDTH = 800
@@ -22,7 +19,6 @@ def main():
     screen = display.set_mode(DISPLAY, FLAGS, DEPTH)
     display.set_caption("Blokido Tower v.0.3")
     timer = time.Clock()
-    up = down = left = right = False
     bg = Surface(BG_SURFACE_WH)
     # call convert with no args
     # this is the fastest format for blitting
@@ -30,35 +26,35 @@ def main():
     bg.fill(Color("#000000"))
     entities = pygame.sprite.Group()
     platforms = []
+    blokido = None
 
     x = y = 0
     level = [
         "PPPPPPPPPPPPPPPPPPPPPPPPP",
-        "PB P                    P",
-        "P  P                    P"
-        "P  P                    P",
-        "P  PP  PPPPPPPP         P",
-        "P  P    PP P  P         P",
-        "P  P    P PPP P         P",
-        "P  P    P PDP P         P",
-        "P  P    P PDP P         P",
-        "P  P    P PDP P         P",
-        "P  P    P PPP P         P",
-        "P  P    P  P PP         P",
-        "P  P    P  P  P         P",
-        "P  P    P  P  P         P",
-        "P  P    P  P  P         P",
-        "P  P    P  P  PD        P",
-        "P  PP  PPPPPPPPPDDDDDDD P",
-        "P  P    P               P",
-        "P  P    P     P         P",
-        "P  P    P     P         P",
-        "P  P    P     P         P",
-        "P  P    P     P         P",
-        "P  P    P     P         P",
+        "P                       P",
+        "P       PPPPPPP         P",
+        "P      PP               P",
+        "P       P               P",
+        "P       P               P",
+        "P     P P               P",
+        "P       P               P",
+        "P       P         P     P",
+        "P   P   P               P",
+        "P       P               P",
+        "P       P    P          P",
+        "P    P  P               P",
+        "P       P               P",
+        "P       P               P",
+        "P  P    PPPPPPP         P",
         "P       P     P         P",
-        "P       PE    P         P",
-        "PPPPPPPPPPPPPPP         P"]
+        "P       P     P         P",
+        "P    P  P     P         P",
+        "P       P     P         P",
+        "P       P     P         P",
+        "P       P               P",
+        "P       P               P",
+        "PB      PE    P         P",
+        "PPPPPPPPPPPPPPPDDDDDDDDDP"]
     # build the level
     for row in level:
         for col in row:
@@ -71,8 +67,8 @@ def main():
                 platforms.append(e)
                 entities.add(e)
             if col == "B":
-                b = Player(x, y, SURFACE_WIDTH, SURFACE_HEIGHT)
-                entities.add(b)
+                blokido = Player(x, y, SURFACE_WIDTH, SURFACE_HEIGHT)
+                entities.add(blokido)
             if col == "D":
                 d = DeathBlock(x, y, SURFACE_WIDTH, SURFACE_HEIGHT)
                 platforms.append(d)
@@ -87,9 +83,10 @@ def main():
         timer.tick(TIMER_TICK)
 
         for e in pygame.event.get():
-            if e.type == QUIT: raise SystemExit, "QUIT"
+            if e.type == QUIT:
+                raise SystemExit("QUIT")
             if e.type == KEYDOWN and e.key == K_ESCAPE:
-                raise SystemExit, "ESCAPE"
+                raise SystemExit("ESCAPE")
             if e.type == KEYDOWN and e.key == K_UP:
                 up = True
             if e.type == KEYDOWN and e.key == K_DOWN:
@@ -114,7 +111,7 @@ def main():
                 screen.blit(bg, (x * SURFACE_WIDTH, y * SURFACE_HEIGHT))
 
         # update player, draw everything else
-        b.update(up, down, left, right, platforms)
+        blokido.update(up, down, left, right, platforms)
         entities.draw(screen)
         pygame.display.flip()
 
@@ -180,7 +177,7 @@ class Player(Entity):
                 if isinstance(p, ExitBlock):
                     event.post(event.Event(QUIT))
                 if isinstance(p, DeathBlock):
-                   event.post(event.Event(QUIT))
+                    event.post(event.Event(QUIT))
                 if xvel > 0:
                     self.rect.right = p.rect.left
                     self.hitSides = True
