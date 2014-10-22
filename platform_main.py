@@ -50,7 +50,7 @@ def main():
         "PD PD D                 P",
         "P  PD D                 P",
         "P  PD D                 P",
-        "P  PD D        P        P",
+        "P  PD D       PP        P",
         "P PPD D                 P",
         "P  PD                   P",
         "PB PD                  EP",
