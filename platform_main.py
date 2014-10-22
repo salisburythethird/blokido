@@ -31,30 +31,31 @@ def main():
     x = y = 0
     level = [
         "PPPPPPPPPPPPPPPPPPPPPPPPP",
-        "P                       P",
-        "P       PPPPPPP         P",
-        "P      PP               P",
-        "P       P               P",
-        "P       P               P",
-        "P     P P               P",
-        "P       P               P",
-        "P       P         P     P",
-        "P   P   P               P",
-        "P       P               P",
-        "P       P    P          P",
-        "P    P  P               P",
-        "P       P               P",
-        "P       P               P",
-        "P  P    PPPPPPP         P",
+        "PB P                    P",
+        "P  P                    P"
+        "P  P                    P",
+        "P  PP  PPPPPPPP         P",
+        "P  P    PP P  P         P",
+        "P  P    P PPP P         P",
+        "P  P    P PDP P         P",
+        "P  P    P PDP P         P",
+        "P  P    P PDP P         P",
+        "P  P    P PPP P         P",
+        "P  P    P  P PP         P",
+        "P  P    P  P  P         P",
+        "P  P    P  P  P         P",
+        "P  P    P  P  P         P",
+        "P  P    P  P  PD        P",
+        "P  PP  PPPPPPPPPDDDDDDD P",
+        "P  P    P               P",
+        "P  P    P     P         P",
+        "P  P    P     P         P",
+        "P  P    P     P         P",
+        "P  P    P     P         P",
+        "P  P    P     P         P",
         "P       P     P         P",
-        "P       P     P         P",
-        "P    P  P     P         P",
-        "P       P     P         P",
-        "P       P     P         P",
-        "P       P               P",
-        "P       P               P",
-        "PB      PE    P         P",
-        "PPPPPPPPPPPPPPPDDDDDDDDDP"]
+        "P       PE    P         P",
+        "PPPPPPPPPPPPPPP         P"]
     # build the level
     for row in level:
         for col in row:
@@ -123,10 +124,10 @@ class Player(Entity):
         self.yvel = 0
         self.hitSides = False
         self.onGround = False
-        self.stamina = 32
+        self.stamina = 10
         self.image = Surface((width, height))
         self.image.convert()
-        self.image.fill(Color("#0000E6"))
+        self.image = pygame.image.load("blokido_sprites\\blokido_right.png")
         self.rect = Rect(x, y, width, height)
 
     def update(self, up, down, left, right, platforms):

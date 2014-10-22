@@ -12,7 +12,9 @@ class Platform(Entity):
         Entity.__init__(self)
         self.image = Surface((width, height))
         self.image.convert()
-        self.image.fill(Color("#435464"))
+        # self.image.fill(Color("#435464"))
+        self.image = pygame.image.load("blokido_sprites\platform.png").convert()
+        # self.rect = self.image.get_rect()
         self.rect = Rect(x, y, width, height)
 
     def update(self):
@@ -22,12 +24,12 @@ class Platform(Entity):
 class ExitBlock(Platform):
     def __init__(self, x, y, width, height):
         Platform.__init__(self, x, y, width, height)
-        self.image.fill(Color("#FFFFCC"))
+        self.image = pygame.image.load("blokido_sprites\end_message.png").convert()
 
 
 class DeathBlock(Platform):
     def __init__(self, x, y, width, height):
         Platform.__init__(self, x, y, width, height)
-        self.image.fill(Color("#FF0000"))
+        self.image = pygame.image.load("blokido_sprites\deathblock.png").convert()
 
 
