@@ -127,7 +127,9 @@ class Player(Entity):
         self.stamina = 10
         self.image = Surface((width, height))
         self.image.convert()
-        self.image = pygame.image.load("blokido_sprites\\blokido_right.png")
+        self.left_face = pygame.image.load("blokido_sprites\\blokido_left.png")
+        self.right_face = pygame.image.load("blokido_sprites\\blokido_right.png")
+        self.image = self.right_face
         self.rect = Rect(x, y, width, height)
 
     def update(self, up, down, left, right, platforms):
@@ -149,8 +151,10 @@ class Player(Entity):
             pass
         if left:
             self.xvel = -8
+            self.image = self.left_face
         if right:
             self.xvel = 8
+            self.image = self.right_face
         if not self.onGround:
             # only accelerate with gravity if in the air
             self.yvel += 0.5
