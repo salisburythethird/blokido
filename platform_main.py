@@ -50,7 +50,7 @@ def main():
         "PD PD D                 P",
         "P  PD D                 P",
         "P  PD D                 P",
-        "P  PD D       PP        P",
+        "P  PD D        P        P",
         "P PPD D                 P",
         "P  PD                   P",
         "PB PD                  EP",
@@ -89,7 +89,9 @@ def main():
                 raise SystemExit("ESCAPE")
             if e.type == KEYDOWN and e.key == K_UP:
                 up = True
-            if e.type == KEYDOWN and e.key == K_DOWN:
+            if e.type == KEYDOWN and e.key == K_SPACE:
+                up = True
+            if e. type == KEYDOWN and e.key == K_DOWN:
                 down = True
             if e.type == KEYDOWN and e.key == K_LEFT:
                 left = True
@@ -97,6 +99,8 @@ def main():
                 right = True
 
             if e.type == KEYUP and e.key == K_UP:
+                up = False
+            if e.type == KEYUP and e.key == K_SPACE:
                 up = False
             if e.type == KEYUP and e.key == K_DOWN:
                 down = False
